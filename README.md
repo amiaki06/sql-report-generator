@@ -81,7 +81,7 @@ sql-report-generator/
 **Amirhossein Aghakasiri**  
 📧 kasiriami06@gmail.com  
 🌐 [GitHub: amiaki06](https://github.com/amiaki06)  
-🔗 [LinkedIn](https://www.linkedin.com/in/amiaki06)
+🔗 [LinkedIn](https://www.linkedin.com/in/amirhossein-aghakasiri)
 
 ---
 
