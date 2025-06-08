@@ -1,76 +1,92 @@
 # UserForm SQL Report Generator
 
-A complex SQL query designed to extract, transform, and format data from a multi-table UserForm system into a clean, report-ready format.
+A powerful SQL query designed to extract, transform, and format data from a multi-table UserForm system into a clean, report-ready output.
+
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
 ---
 
 ## 📌 Project Goals
 
-- Join multiple related tables by their numeric IDs  
-- Resolve intermediate form IDs to full details (contracts, customers, logistics, etc.)  
-- Translate boolean flags and format dates for readability  
-- Perform on-the-fly calculations (sums, aggregates)  
-- Produce a single row report per LOT number  
+- Join multiple related tables by their numeric IDs
+- Resolve form relationships (e.g. contracts, customers, logistics)
+- Translate boolean flags and format dates for readability
+- Perform on-the-fly calculations (aggregates, totals)
+- Output one row per `LOT` with combined info
 
 ---
 
 ## 🗄️ Database Schema Overview
 
-The application stores form data across many tables, linking them by numeric IDs. In the main form only the IDs of related “sub-forms” are saved. To build a comprehensive report, this query:
+The UserForm system stores data across multiple linked tables. The query:
 
-1. **Follows** those ID relationships back into each referenced table  
-2. **Joins** with look-up tables to retrieve human-readable labels  
-3. **Aggregates** multi-value fields (e.g. multiple LOT numbers, product details) into single columns  
-
----
-
-## 🔍 Key Features of the Query
-
-- **Date formatting**: `GETDATE()` and `CONVERT` → `YYYY/MM/DD`  
-- **Boolean translation**: `CASE WHEN … IN ('1','True') THEN 'true' ELSE 'false' END`  
-- **Conditional fields**: Only show formatted date if the corresponding flag is true  
-- **Aggregations**:  
-  - `STRING_AGG` to combine related rows (e.g. LOTNumbers, ProductDetails)  
-  - `SUM(... ) OVER ()` to compute totals without `GROUP BY`  
-- **Type coercion**: `TRY_CAST` to handle inconsistent source types  
+- Traverses ID relationships to fetch associated records
+- Joins lookup tables to retrieve readable labels
+- Aggregates multi-value fields (e.g. products, LOTs) into single columns
 
 ---
 
-## ⚠️ Performance & Maintenance Notes
+## 🔍 Key Query Features
 
-- **Many `LEFT JOIN`s** may slow queries on large tables—ensure key columns are indexed.  
-- **`COALESCE(NULLIF(...))` in JOINs** can prevent index usage; consider restructuring if performance suffers.  
-- **`TRY_CAST` nulls**: invalid casts become `NULL`; add data-quality checks if needed.  
-- **`STRING_SPLIT` pitfalls**: splitting on empty or `NULL` strings may produce unexpected results.  
+- **Date Formatting:** `GETDATE()` + `CONVERT` → `YYYY/MM/DD`
+- **Boolean Translation:**  
+  ```sql
+  CASE WHEN [field] IN ('1','True') THEN 'true' ELSE 'false' END
+  ```
+- **Conditional Logic:** Show fields only if relevant flags are `true`
+- **Aggregation:**
+  - `STRING_AGG` for multi-row values like LOTs or products
+  - `SUM(...) OVER ()` for totals without using `GROUP BY`
+- **Type Coercion:** `TRY_CAST` handles inconsistent input types
+
+---
+
+## ⚠️ Performance Notes
+
+- **LEFT JOINs:** May slow down queries on large datasets; ensure indexes exist.
+- **COALESCE/NULLIF in JOINs:** May prevent index use; optimize if needed.
+- **TRY_CAST to NULL:** Invalid conversions return `NULL` silently—consider data validation.
+- **STRING_SPLIT issues:** Watch for empty/null inputs when splitting strings.
 
 ---
 
 ## 🚀 Usage
 
-1. Clone this repository  
+1. Clone this repository:
    ```bash
    git clone https://github.com/amiaki06/sql-report-generator.git
-   
-2. Open queries/userform_report.sql in SQL Server Management Studio (or your preferred client).
+   ```
+2. Open the query file in SQL Server Management Studio:
+   ```
+   queries/userform_report.sql
+   ```
+3. Set the `@LotNumber` parameter (or use a `WHERE` clause) to filter the target LOT.
+4. Run the script and export the result (e.g. CSV, Excel).
 
-3. Set the @LotNumber parameter (or add a WHERE clause) to target a specific LOT.
+---
 
-4. Execute and export the result (CSV, Excel, etc.) for reporting.
+## 📁 Project Structure
 
+```
 sql-report-generator/
 ├── queries/
-│   └── userform_report.sql       # Main SQL query
+│   └── userform_report.sql     # Main SQL query
 ├── docs/
-│   └── explanation.md            # Schema notes & field mappings
-└── README.md                     # This file
+│   └── explanation.md          # Field mappings and schema notes (optional)
+└── README.md                   # Project documentation
+```
 
+---
 
-## 🧑‍💻 Author
-Amirhossein Aghakasiri (amiaki06)
+## 👤 Author
 
-📧 kasiriami06@gmail.com
+**Amirhossein Aghakasiri**  
+📧 kasiriami06@gmail.com  
+🌐 [GitHub: amiaki06](https://github.com/amiaki06)  
+🔗 [LinkedIn](https://www.linkedin.com/in/amiaki06)
 
-🔗 LinkedIn
+---
 
-💻 GitHub
+## 📄 License
 
+This project is licensed under the [MIT License](LICENSE.txt).
