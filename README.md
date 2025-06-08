@@ -71,8 +71,6 @@ The UserForm system stores data across multiple linked tables. The query:
 sql-report-generator/
 ├── queries/
 │   └── userform_report.sql     # Main SQL query
-├── docs/
-│   └── explanation.md          # Field mappings and schema notes (optional)
 └── README.md                   # Project documentation
 ```
 
