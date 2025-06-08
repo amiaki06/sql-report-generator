@@ -6,6 +6,18 @@ A powerful SQL query designed to extract, transform, and format data from a mult
 
 ---
 
+## 📚 Table of Contents
+- [Project Goals](#-project-goals)
+- [Database Schema](#-database-schema-overview)
+- [Key Features](#-key-query-features)
+- [Performance Notes](#-performance-notes)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
+- [Author](#-author)
+- [License](#-license)
+
+---
+
 ## 📌 Project Goals
 
 - Join multiple related tables by their numeric IDs
@@ -23,6 +35,8 @@ The UserForm system stores data across multiple linked tables. The query:
 - Traverses ID relationships to fetch associated records
 - Joins lookup tables to retrieve readable labels
 - Aggregates multi-value fields (e.g. products, LOTs) into single columns
+
+For more details, see 📄 [docs/explanation.md](./docs/explanation.md)
 
 ---
 
@@ -57,11 +71,13 @@ The UserForm system stores data across multiple linked tables. The query:
    git clone https://github.com/amiaki06/sql-report-generator.git
    ```
 2. Open the query file in SQL Server Management Studio:
-   ```
-   queries/userform_report.sql
-   ```
-3. Set the `@LotNumber` parameter (or use a `WHERE` clause) to filter the target LOT.
-4. Run the script and export the result (e.g. CSV, Excel).
+   📄 [queries/userform_report.sql](./queries/userform_report.sql)
+
+3. Open the database structure script:
+   📄 [database/report_lot_info_database.sql](./database/report_lot_info_database.sql)
+
+4. Set the `@LotNumber` parameter (or use a `WHERE` clause) to filter the target LOT.
+5. Run the script and export the result (e.g. CSV, Excel).
 
 ---
 
@@ -70,8 +86,13 @@ The UserForm system stores data across multiple linked tables. The query:
 ```
 sql-report-generator/
 ├── queries/
-│   └── userform_report.sql     # Main SQL query
-└── README.md                   # Project documentation
+│   └── userform_report.sql
+├── database/
+│   └── report_lot_info_database.sql
+├── docs/
+│   └── explanation.md
+├── LICENSE.txt
+└── README.md
 ```
 
 ---
@@ -87,4 +108,4 @@ sql-report-generator/
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE.txt).
+This project is licensed under the [MIT License](./LICENSE.txt).
