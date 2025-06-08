@@ -50,8 +50,10 @@ The application stores form data across many tables, linking them by numeric IDs
 1. Clone this repository  
    ```bash
    git clone https://github.com/amiaki06/sql-report-generator.git
-``
-2. Open `queries/userform_report.sql` in SQL Server Management Studio (or your preferred client).
-3. Set the `@LotNumber` parameter (or add a `WHERE` clause) to target a specific LOT.
+   
+2. Open queries/userform_report.sql in SQL Server Management Studio (or your preferred client).
+
+3. Set the @LotNumber parameter (or add a WHERE clause) to target a specific LOT.
+
 4. Execute and export the result (CSV, Excel, etc.) for reporting.
 
