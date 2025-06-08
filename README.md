@@ -57,3 +57,20 @@ The application stores form data across many tables, linking them by numeric IDs
 
 4. Execute and export the result (CSV, Excel, etc.) for reporting.
 
+sql-report-generator/
+├── queries/
+│   └── userform_report.sql       # Main SQL query
+├── docs/
+│   └── explanation.md            # Schema notes & field mappings
+└── README.md                     # This file
+
+
+## 🧑‍💻 Author
+Amirhossein Aghakasiri (amiaki06)
+
+📧 kasiriami06@gmail.com
+
+🔗 LinkedIn
+
+💻 GitHub
+
